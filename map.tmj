@@ -1606,7 +1606,7 @@
          "value":"src\/main.ts"
         }],
  "renderorder":"right-down",
- "tiledversion":"1.10.2",
+ "tiledversion":"1.8.4",
  "tileheight":32,
  "tilesets":[
         {
@@ -2284,11 +2284,11 @@
         {
          "columns":2,
          "firstgid":4313,
-         "image":"tilesets\/power supply.png",
+         "image":"tilesets\/alim.png",
          "imageheight":64,
          "imagewidth":64,
          "margin":0,
-         "name":"power_supply",
+         "name":"alim",
          "spacing":0,
          "tilecount":4,
          "tileheight":32,
@@ -2297,11 +2297,11 @@
         {
          "columns":2,
          "firstgid":4317,
-         "image":"tilesets\/ventirad.png",
+         "image":"tilesets\/ven.png",
          "imageheight":66,
          "imagewidth":68,
          "margin":0,
-         "name":"ventirad",
+         "name":"ven",
          "spacing":0,
          "tilecount":4,
          "tileheight":32,
@@ -2310,11 +2310,11 @@
         {
          "columns":3,
          "firstgid":4321,
-         "image":"tilesets\/hard drive.png",
+         "image":"tilesets\/hdd.png",
          "imageheight":67,
          "imagewidth":127,
          "margin":0,
-         "name":"hard_drive",
+         "name":"hdd",
          "spacing":0,
          "tilecount":6,
          "tileheight":32,
@@ -2349,11 +2349,11 @@
         {
          "columns":2,
          "firstgid":4335,
-         "image":"tilesets\/motherboard.png",
+         "image":"tilesets\/cm.png",
          "imageheight":66,
          "imagewidth":71,
          "margin":0,
-         "name":"motherboard",
+         "name":"cm",
          "spacing":0,
          "tilecount":4,
          "tileheight":32,
@@ -2388,11 +2388,11 @@
         {
          "columns":2,
          "firstgid":4367,
-         "image":"tilesets\/graphics card.png",
+         "image":"tilesets\/cg.png",
          "imageheight":78,
          "imagewidth":80,
          "margin":0,
-         "name":"graphics card",
+         "name":"cg",
          "spacing":0,
          "tilecount":4,
          "tileheight":32,
@@ -2400,6 +2400,6 @@
         }],
  "tilewidth":32,
  "type":"map",
- "version":"1.10",
+ "version":"1.8",
  "width":31
 }

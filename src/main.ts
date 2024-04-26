@@ -75,7 +75,7 @@ const activateAreas = () => {
     showPopup(
       "Carte mère",
       "Elément central de votre ordinateur, responsable de la communication entre les différents composants de votre ordinateur.",
-      "motherboard"
+      "cm"
     );
   });
 
@@ -91,7 +91,7 @@ const activateAreas = () => {
     showPopup(
       "Carte graphique",
       "Permet de traiter les informations graphiques de votre ordinateur.",
-      "graphics card"
+      "cg"
     );
   });
 
@@ -107,7 +107,7 @@ const activateAreas = () => {
     showPopup(
       "Disque dur",
       "Permet de stocker de manière permanente vos données et programmes.",
-      "hard drive"
+      "hdd"
     );
   });
 
@@ -115,7 +115,7 @@ const activateAreas = () => {
     showPopup(
       "Ventirad",
       "Permet de refroidir votre processeur pour éviter la surchauffe.",
-      "ventirad"
+      "ven"
     );
   });
 
@@ -123,7 +123,7 @@ const activateAreas = () => {
     showPopup(
       "Alimentation",
       "Permet d'alimenter votre ordinateur en électricité.",
-      "power supply"
+      "alim"
     );
   });
 

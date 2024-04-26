@@ -31,15 +31,17 @@
             const item = document.createElement('div');
             item.classList.add('item');
             const itemImage = document.createElement('img');
-            itemImage.src = 'tilesets/items/' + itemName.substring(5) + '.png';
+            console.log(itemName.substring(5));
+            itemImage.src = '/tilesets/items' + itemName.substring(5) + '.png';
             item.appendChild(itemImage);
 
             inventoryContainer.appendChild(item);
         }
         
-        const items = ['above/cpu', 'above/motherboard', 'above/ram', 'above/graphics card', 'above/ssd', 'above/hard drive', 'above/ventirad', 'above/power supply'];
+        const items = ['above/cpu', 'above/cm', 'above/ram', 'above/cg', 'above/ssd', 'above/hdd', 'above/ven', 'above/alim'];
 
         items.forEach((item) => {
+            console.log(item)
             setItemGettedToInventory(item);
         });
     </script>
