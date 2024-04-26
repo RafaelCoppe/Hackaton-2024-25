@@ -4,7 +4,7 @@
 - ***DE DOMENICO Victor*** (Nirdeo)
   - Score, timer, podium, animation du tapis roulant
 - ***Davigny Théo*** (Thivalaine)
-  - Prise et dépot d'un objet, sons, 
+  - Prise et dépot d'un objet, bouton et inventaire, sons, 
 - ***COPPE Rafael*** (RafaelCoppe)
   - Génération des tickets, dépot d'un objet dans un ordinateur, gestion de la réponse utilisateur
 
