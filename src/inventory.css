@@ -6,3 +6,17 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
 }
+
+.inventoryContainer > div {
+    position: relative;
+}
+
+.delete {
+    position: absolute;
+    top: 0;
+    background-color: red;
+    color: white;
+    cursor: pointer;
+    border-radius: 999px;
+    border: none;
+}
