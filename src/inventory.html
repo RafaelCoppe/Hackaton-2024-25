@@ -9,6 +9,8 @@
     </body>
     <script type="module">
         import { bootstrapExtra, getLayersMap, getVariables } from "@workadventure/scripting-api-extra";
+        import { ITiledMapTileLayer } from "@workadventure/tiled-map-type-guard/dist/ITiledMapTileLayer";
+
         const layers = getLayersMap();
 
         function setItemGettedToInventory(itemName) {
@@ -35,6 +37,29 @@
             itemImage.src = '/tilesets/items' + itemName.substring(5) + '.png';
             item.appendChild(itemImage);
 
+            const buttonDelete = document.createElement('button');
+            buttonDelete.innerHTML = '<img src="/tilesets/close.svg" alt="delete" />'
+            buttonDelete.classList.add('delete');
+            buttonDelete.addEventListener('click', () => {
+                item.remove();
+
+                WA.room.setProperty(itemName, 'getted', false);
+
+                    layers.then((layer) => {
+                        Object.entries(layer.get(itemName)).forEach((key) => {
+                            if (key[0] === 'properties') {
+                                Object.values(key[1]).forEach((value) => {
+                                    if (value.name === 'getted' && value.value === true) {
+                                        value.value = false;
+                                        WA.room.showLayer(itemName);
+                                    }
+                                }
+                            )};
+                        });
+                    });
+            });
+
+            item.appendChild(buttonDelete);
             inventoryContainer.appendChild(item);
         }
         
