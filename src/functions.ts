@@ -297,3 +297,18 @@ export function moveComputer(computers: string[], timerDuration: number) {
     });
   }, timerDuration);
 }
+
+export function showLayer(timerDuration: number) {
+  const layers = [
+    "above/computer1",
+    "floorLayer/computer_action",
+  ];
+
+layers.forEach(layer => {
+    WA.room.showLayer(layer);
+
+    setTimeout(() => {
+      WA.room.hideLayer(layer);
+    }, timerDuration);
+  });
+}

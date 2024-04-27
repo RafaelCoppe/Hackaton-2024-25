@@ -11,6 +11,7 @@ import {
   setPlayerNameforGame,
   moveComputer,
   setCurrentTicket,
+  showLayer,
 } from "./functions";
 
 import { getItem } from "./inventory";
@@ -57,65 +58,65 @@ const activateAreas = () => {
 
   WA.room.area.onEnter("processeurPopup").subscribe(() => {
     showPopup(
-      "Processeur",
-      "Element central de votre ordinateur, responsable de l'execution des programmes et de la gestion des ressources de votre ordinateur.",
-      "cpu"
+        "Processeur",
+        "Element central de votre ordinateur, responsable de l'execution des programmes et de la gestion des ressources de votre ordinateur.",
+        "cpu"
     );
   });
 
   WA.room.area.onEnter("carteMerePopup").subscribe(() => {
     showPopup(
-      "Carte mère",
-      "Elément central de votre ordinateur, responsable de la communication entre les différents composants de votre ordinateur.",
-      "cm"
+        "Carte mère",
+        "Elément central de votre ordinateur, responsable de la communication entre les différents composants de votre ordinateur.",
+        "cm"
     );
   });
 
   WA.room.area.onEnter("ramPopup").subscribe(() => {
     showPopup(
-      "Mémoire vive",
-      "Permet de stocker temporairement les données de vos programmes en cours d'execution.",
-      "ram"
+        "Mémoire vive",
+        "Permet de stocker temporairement les données de vos programmes en cours d'execution.",
+        "ram"
     );
   });
 
   WA.room.area.onEnter("carteGraphiquePopup").subscribe(() => {
     showPopup(
-      "Carte graphique",
-      "Permet de traiter les informations graphiques de votre ordinateur.",
-      "cg"
+        "Carte graphique",
+        "Permet de traiter les informations graphiques de votre ordinateur.",
+        "cg"
     );
   });
 
   WA.room.area.onEnter("ssdPopup").subscribe(() => {
     showPopup(
-      "SSD",
-      "Permet de stocker de manière permanente vos données et programmes.",
-      "ssd"
+        "SSD",
+        "Permet de stocker de manière permanente vos données et programmes.",
+        "ssd"
     );
   });
 
   WA.room.area.onEnter("disqueDurPopup").subscribe(() => {
     showPopup(
-      "Disque dur",
-      "Permet de stocker de manière permanente vos données et programmes.",
-      "hdd"
+        "Disque dur",
+        "Permet de stocker de manière permanente vos données et programmes.",
+        "hdd"
     );
   });
 
   WA.room.area.onEnter("ventiradPopup").subscribe(() => {
     showPopup(
-      "Ventirad",
-      "Permet de refroidir votre processeur pour éviter la surchauffe.",
-      "ven"
+        "Ventirad",
+        "Permet de refroidir votre processeur pour éviter la surchauffe.",
+        "ven"
     );
   });
 
   WA.room.area.onEnter("alimentationPopup").subscribe(() => {
     showPopup(
-      "Alimentation",
-      "Permet d'alimenter votre ordinateur en électricité.",
-      "alim"
+        "Alimentation",
+        "Permet d'alimenter votre ordinateur en électricité.",
+        "alim"
     );
   });
 
@@ -167,120 +168,122 @@ const activateAreas = () => {
 };
 
 WA.onInit()
-  .then(() => {
-    console.log("Scripting API ready");
-    console.log("Player tags: ", WA.player.tags);
-    console.log("Player name: ", WA.player.name);
-    console.log("Player ID: ", WA.player.id);
-    console.log("Player language: ", WA.player.language);
+    .then(() => {
+      console.log("Scripting API ready");
+      console.log("Player tags: ", WA.player.tags);
+      console.log("Player name: ", WA.player.name);
+      console.log("Player ID: ", WA.player.id);
+      console.log("Player language: ", WA.player.language);
 
-    setPlayerNameforGame(WA.player.name);
-    setTickets(game_data, level);
-    game_tickets = getTickets();
+      setPlayerNameforGame(WA.player.name);
+      setTickets(game_data, level);
+      game_tickets = getTickets();
 
-    const computers = [
-      "computers/computer2",
-      "computers/computer3",
-      "computers/computer4",
-      "computers/computer5",
-      "computers/computer6",
-      "computers/computer7",
-      "computers/computer8",
-      "computers/computer9",
-      "computers/computer10",
-      "computers/computer11",
-      "computers/computer12",
-      "computers/computer13",
-      "computers/computer14",
-      "computers/computer15",
-      "computers/computer16",
-      "computers/computer1",
-      "computers/computer17",
-      "computers/computer18",
-      "computers/computer19",
-      "computers/computer20",
-      "computers/computer21",
-    ];
+      const computers = [
+        "computers/computer2",
+        "computers/computer3",
+        "computers/computer4",
+        "computers/computer5",
+        "computers/computer6",
+        "computers/computer7",
+        "computers/computer8",
+        "computers/computer9",
+        "computers/computer10",
+        "computers/computer11",
+        "computers/computer12",
+        "computers/computer13",
+        "computers/computer14",
+        "computers/computer15",
+        "computers/computer16",
+        "computers/computer1",
+        "computers/computer17",
+        "computers/computer18",
+        "computers/computer19",
+        "computers/computer20",
+        "computers/computer21",
+      ];
 
-    WA.room.area.onEnter("changeDifficulty").subscribe(() => {
-      currentPopup = WA.ui.openPopup(
-        "showDifficultyPopup",
-        "Niveau de difficulté : " + level,
-        []
-      );
 
-      changeDifficultyLevelMessage = WA.ui.displayActionMessage({
-        message: "Appuyez sur 'Espace' pour changer le niveau de difficulté",
-        callback: () => {
-          level = (level % game_data.difficulties.length) + 1;
-          closePopup(currentPopup);
-          currentPopup = WA.ui.openPopup(
+      WA.room.area.onEnter("changeDifficulty").subscribe(() => {
+        currentPopup = WA.ui.openPopup(
             "showDifficultyPopup",
             "Niveau de difficulté : " + level,
             []
-          );
-          setTickets(game_data, level);
-          game_tickets = getTickets();
-          
-        },
+        );
+
+        changeDifficultyLevelMessage = WA.ui.displayActionMessage({
+          message: "Appuyez sur 'Espace' pour changer le niveau de difficulté",
+          callback: () => {
+            level = (level % game_data.difficulties.length) + 1;
+            closePopup(currentPopup);
+            currentPopup = WA.ui.openPopup(
+                "showDifficultyPopup",
+                "Niveau de difficulté : " + level,
+                []
+            );
+            setTickets(game_data, level);
+            game_tickets = getTickets();
+
+          },
+        });
       });
-    });
-    WA.room.area.onLeave("changeDifficulty").subscribe(() => {
-      closePopup(currentPopup);
-      changeDifficultyLevelMessage.remove();
-    });
-
-    WA.room.area.onEnter("startGame").subscribe(() => {
-      startGameMessage = WA.ui.displayActionMessage({
-        message: "Appuyez sur 'Espace' pour démarrer la partie",
-        callback: () => {
-          setCurrentTicket(game_tickets[0]);
-          activateAreas();
-          startGame();
-          let gameTimer = game_data.difficulties[level - 1].timeout;
-          setTimerforGame(gameTimer);
-          gameStarted(game_tickets.length);
-          moveComputer(computers, gameTimer * 1000);
-        },
+      WA.room.area.onLeave("changeDifficulty").subscribe(() => {
+        closePopup(currentPopup);
+        changeDifficultyLevelMessage.remove();
       });
-    });
-    WA.room.area.onLeave("startGame").subscribe(() => {
-      startGameMessage.remove();
-    });
 
-    let podiumWebsite: any;
-    let enterCounter = 0;
-
-    WA.room.onEnterLayer("podium").subscribe(async () => {
-      enterCounter++;
-      console.log("Entered podium layer", enterCounter, "times");
-      podiumWebsite = await WA.ui.website.open({
-        url: "./src/podium.html",
-        position: {
-          vertical: "top",
-          horizontal: "middle",
-        },
-        size: {
-          height: "100vh",
-          width: "70vw",
-        },
-        margin: {
-          top: "5vh",
-        },
-        allowApi: true,
+      WA.room.area.onEnter("startGame").subscribe(() => {
+        startGameMessage = WA.ui.displayActionMessage({
+          message: "Appuyez sur 'Espace' pour démarrer la partie",
+          callback: () => {
+            setCurrentTicket(game_tickets[0]);
+            activateAreas();
+            startGame();
+            let gameTimer = game_data.difficulties[level - 1].timeout;
+            setTimerforGame(gameTimer);
+            gameStarted(game_tickets.length);
+            moveComputer(computers, gameTimer * 1000);
+            showLayer(gameTimer * 1000);
+          },
+        });
       });
-    });
+      WA.room.area.onLeave("startGame").subscribe(() => {
+        startGameMessage.remove();
+      });
 
-    WA.room.onLeaveLayer("podium").subscribe(() => {
-      podiumWebsite.close();
-    });
+      let podiumWebsite: any;
+      let enterCounter = 0;
+
+      WA.room.onEnterLayer("podium").subscribe(async () => {
+        enterCounter++;
+        console.log("Entered podium layer", enterCounter, "times");
+        podiumWebsite = await WA.ui.website.open({
+          url: "./src/podium.html",
+          position: {
+            vertical: "top",
+            horizontal: "middle",
+          },
+          size: {
+            height: "100vh",
+            width: "70vw",
+          },
+          margin: {
+            top: "5vh",
+          },
+          allowApi: true,
+        });
+      });
+
+      WA.room.onLeaveLayer("podium").subscribe(() => {
+        podiumWebsite.close();
+      });
 
       bootstrapExtra()
-      .then(() => {
-        console.log("Scripting API Extra ready");
-      })
-      .catch((e) => console.error(e));
-  })
-  .catch((e) => console.error(e));
+          .then(() => {
+            console.log("Scripting API Extra ready");
+          })
+          .catch((e) => console.error(e));
+    })
+    .catch((e) => console.error(e));
 
 export {};

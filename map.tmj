@@ -1176,7 +1176,7 @@
                  "name":"computer_action",
                  "rotation":0,
                  "type":"area",
-                 "visible":true,
+                 "visible":false,
                  "width":70.1666666666667,
                  "x":682,
                  "y":534.916666666666
@@ -1218,7 +1218,7 @@
                  "name":"computer1",
                  "opacity":1,
                  "type":"tilelayer",
-                 "visible":true,
+                 "visible":false,
                  "width":31,
                  "x":0,
                  "y":0
@@ -1606,7 +1606,7 @@
          "value":"src\/main.ts"
         }],
  "renderorder":"right-down",
- "tiledversion":"1.8.4",
+ "tiledversion":"1.10.2",
  "tileheight":32,
  "tilesets":[
         {
@@ -2400,6 +2400,6 @@
         }],
  "tilewidth":32,
  "type":"map",
- "version":"1.8",
+ "version":"1.10",
  "width":31
 }
