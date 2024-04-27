@@ -2,7 +2,7 @@
 - ***MAGANGA Inès*** (ines-mgg)
   - Design de la map, popup des composants, timer, popup résultat
 - ***DE DOMENICO Victor*** (Nirdeo)
-  - Score, timer, podium, animation du tapis roulant
+  - Score, timer, podium, animation du tapis roulant, ordinateurs qui bougent
 - ***Davigny Théo*** (Thivalaine)
   - Prise et dépot d'un objet, bouton et inventaire, sons, 
 - ***COPPE Rafael*** (RafaelCoppe)
