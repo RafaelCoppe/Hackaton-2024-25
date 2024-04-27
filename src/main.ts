@@ -7,7 +7,9 @@ import {
   startGame,
   setTimerforGame,
   setScoreforGame,
-  gameStarted, setPlayerNameforGame,
+  gameStarted,
+  setPlayerNameforGame,
+  moveComputer,
 } from './functions';
 import { getItem } from "./inventory";
 
@@ -175,7 +177,6 @@ const activateAreas = () => {
   });
 }
 
-// Waiting for the API to be ready
 WA.onInit()
   .then(() => {
     console.log("Scripting API ready");
@@ -184,12 +185,10 @@ WA.onInit()
     console.log("Player ID: ", WA.player.id);
     console.log("Player language: ", WA.player.language);
 
-    // Initialisation des tickets et des jeux
     setPlayerNameforGame(WA.player.name);
 
     game_tickets = getTickets(game_data, level);
 
-    // Liste des ordinateurs à alterner
     const computers = [
       "computers/computer2",
       "computers/computer3",
@@ -244,12 +243,13 @@ WA.onInit()
       startGameMessage = WA.ui.displayActionMessage({
         message: "Appuyez sur 'Espace' pour démarrer la partie",
         callback: () => {
-          current_ticket = game_tickets[0];
-          activateAreas();
-          startGame();
-          setTimerforGame(game_data.difficulties[level - 1].timeout);
-          gameStarted(game_tickets.length);
-          moveComputer();
+            current_ticket = game_tickets[0];
+            activateAreas();
+            startGame();
+            let gameTimer = game_data.difficulties[level - 1].timeout;
+            setTimerforGame(gameTimer);
+            gameStarted(game_tickets.length);
+            moveComputer(computers, gameTimer * 1000);
         },
       });
     });
@@ -284,39 +284,7 @@ WA.onInit()
       podiumWebsite.close();
     });
 
-    function moveComputer() {
-      // Cache tous les ordinateurs au début
-      computers.forEach(computer => {
-        WA.room.hideLayer(computer);
-      });
-
-      let currentComputerIndex = 0;
-
-      // Démarre l'alternance d'affichage des ordinateurs
-      const intervalId = setInterval(() => {
-        // Cache tous les ordinateurs à chaque itération
-        computers.forEach(computer => {
-          WA.room.hideLayer(computer);
-        });
-
-        // Affiche seulement l'ordinateur courant
-        WA.room.showLayer(computers[currentComputerIndex]);
-
-        // Mise à jour de l'index pour la prochaine itération
-        currentComputerIndex = (currentComputerIndex + 1) % computers.length;
-      }, 1000);
-
-      // Arrêter l'intervalle après 10 secondes
-      setTimeout(() => {
-        clearInterval(intervalId);
-        // Assurez-vous que tous les ordinateurs sont cachés à la fin
-        computers.forEach(computer => {
-          WA.room.hideLayer(computer);
-        });
-      }, 25000);
-    }
-
-    bootstrapExtra()
+      bootstrapExtra()
       .then(() => {
         console.log("Scripting API Extra ready");
       })
