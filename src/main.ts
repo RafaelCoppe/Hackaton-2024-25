@@ -4,11 +4,13 @@ import {
   addComponent,
   closePopup,
   getTickets,
+  setTickets,
   startGame,
   setTimerforGame,
-  setScoreforGame,
-  gameStarted, setPlayerNameforGame,
-} from './functions';
+  gameStarted,
+  setPlayerNameforGame,
+  setCurrentTicket,
+} from "./functions";
 import { getItem } from "./inventory";
 
 console.log("Script started successfully");
@@ -18,21 +20,9 @@ let changeDifficultyLevelMessage: any = undefined;
 let startGameMessage: any = undefined;
 let level: number = 1;
 let game_tickets: any[] = [];
-let current_ticket_id = 0;
 let dropItemMessage: any = undefined;
 
-export let current_ticket = null;
-
-export const getNextTicket = () => {
-  current_ticket_id++
-  current_ticket = game_tickets[current_ticket_id];
-}
-
-async function showPopup(
-  title: string,
-  description: string,
-  image: string
-) {
+async function showPopup(title: string, description: string, image: string) {
   currentPopup = await WA.ui.website.open({
     url: `./src/componantsPopup.html?title=${title}&description=${description}&image=${image}`,
     position: {
@@ -159,12 +149,11 @@ const activateAreas = () => {
     closePopup(currentPopup);
   });
 
-
   WA.room.area.onEnter("computer_action").subscribe(() => {
     dropItemMessage = WA.ui.displayActionMessage({
       message: "Appuyez sur 'Espace' pour ajouter le composant à l'ordinateur",
       callback: () => {
-        if(WA.player.item != null){
+        if (WA.player.item != null) {
           addComponent(WA.player.item);
         }
       },
@@ -173,7 +162,7 @@ const activateAreas = () => {
   WA.room.area.onLeave("computer_action").subscribe(() => {
     dropItemMessage.remove();
   });
-}
+};
 
 // Waiting for the API to be ready
 WA.onInit()
@@ -186,8 +175,8 @@ WA.onInit()
 
     // Initialisation des tickets et des jeux
     setPlayerNameforGame(WA.player.name);
-
-    game_tickets = getTickets(game_data, level);
+    setTickets(game_data, level);
+    game_tickets = getTickets();
 
     // Liste des ordinateurs à alterner
     const computers = [
@@ -231,7 +220,9 @@ WA.onInit()
             "Niveau de difficulté : " + level,
             []
           );
-          game_tickets = getTickets(game_data, level);
+          setTickets(game_data, level);
+          game_tickets = getTickets();
+          
         },
       });
     });
@@ -244,7 +235,7 @@ WA.onInit()
       startGameMessage = WA.ui.displayActionMessage({
         message: "Appuyez sur 'Espace' pour démarrer la partie",
         callback: () => {
-          current_ticket = game_tickets[0];
+          setCurrentTicket(game_tickets[0]);
           activateAreas();
           startGame();
           setTimerforGame(game_data.difficulties[level - 1].timeout);
@@ -286,7 +277,7 @@ WA.onInit()
 
     function moveComputer() {
       // Cache tous les ordinateurs au début
-      computers.forEach(computer => {
+      computers.forEach((computer) => {
         WA.room.hideLayer(computer);
       });
 
@@ -295,7 +286,7 @@ WA.onInit()
       // Démarre l'alternance d'affichage des ordinateurs
       const intervalId = setInterval(() => {
         // Cache tous les ordinateurs à chaque itération
-        computers.forEach(computer => {
+        computers.forEach((computer) => {
           WA.room.hideLayer(computer);
         });
 
@@ -310,7 +301,7 @@ WA.onInit()
       setTimeout(() => {
         clearInterval(intervalId);
         // Assurez-vous que tous les ordinateurs sont cachés à la fin
-        computers.forEach(computer => {
+        computers.forEach((computer) => {
           WA.room.hideLayer(computer);
         });
       }, 25000);

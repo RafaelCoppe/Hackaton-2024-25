@@ -3,13 +3,29 @@ let timer: number;
 let score: number = 0;
 let playerName: string;
 let mySound: any;
+let current_ticket: any = {};
+let current_ticket_id = 0;
+let gameTickets: any[] = [];
 
-import { get } from "http";
 /*
   Donne un numéro aléatoire entre un min et un max
  */
 import { updateStepArea } from "./computer";
-import { current_ticket, getNextTicket } from "./main";
+// import { current_ticket, getNextTicket } from "./main";
+
+export function getCurrentTicket() {
+  return current_ticket;
+}
+
+export function setCurrentTicket(ticket: any) {
+  current_ticket = ticket;
+}
+
+export function getNextTicket() {
+  let game_tickets = getTickets();
+  current_ticket_id++;
+  setCurrentTicket(game_tickets[current_ticket_id]);
+}
 
 export function get_random_number(min: number, max: number) {
   const minCeiled = Math.ceil(min);
@@ -45,7 +61,7 @@ export function shuffle_array(array: any[]) {
   game_data : les données du fichier game_data.json (importé dans main.ts)
   level : le numéro du niveau
  */
-export const getTickets = (
+export const setTickets = (
   game_data: {
     components?: { short_name: string; long_name: string }[];
     difficulties: any;
@@ -53,7 +69,6 @@ export const getTickets = (
   },
   level: number
 ) => {
-  let tickets: any[] = [];
   const level_object = game_data.difficulties.find((i: { level: number }) => {
     return i.level == level;
   });
@@ -68,18 +83,21 @@ export const getTickets = (
         return j.demands;
       });
     unformated_tickets.forEach((i: any[]) => {
-      Array.prototype.push.apply(tickets, i);
+      Array.prototype.push.apply(gameTickets, i);
     });
 
     // Chaque ticket ordonné au hasard
-    shuffle_array(tickets);
-    tickets.forEach((i) => {
+    shuffle_array(gameTickets);
+    gameTickets.forEach((i) => {
       i.interval = get_interval(level_object.interval) * 1000;
     });
   }
-
-  return tickets;
 };
+
+export const getTickets = () => {
+  return gameTickets;
+
+}
 
 /**
  * Ferme un popup
@@ -226,7 +244,7 @@ export const gameStarted = (totalTickets: number) => {
       },
       allowApi: true,
     });
-    if (timer <= 0 || getScoreforGame() == totalTickets) {
+    if (timer <= 0 || getScoreforGame() == totalTickets || getCurrentTicket() == undefined){
       clearInterval(count);
       if (timerPopup) {
         let popup = await timerPopup;
