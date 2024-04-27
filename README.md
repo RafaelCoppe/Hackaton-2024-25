@@ -1,6 +1,6 @@
 # Membres du groupe
 - ***MAGANGA Inès*** (ines-mgg)
-  - Design de la map, popup des composants, timer
+  - Design de la map, popup des composants, timer, popup résultat
 - ***DE DOMENICO Victor*** (Nirdeo)
   - Score, timer, podium, animation du tapis roulant
 - ***Davigny Théo*** (Thivalaine)
