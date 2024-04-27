@@ -272,3 +272,28 @@ export const gameStarted = (totalTickets: number) => {
     }
   }, 1000);
 };
+
+export function moveComputer(computers: string[], timerDuration: number) {
+  computers.forEach(computer => {
+    WA.room.hideLayer(computer);
+  });
+
+  let currentComputerIndex = 0;
+
+  const intervalId = setInterval(() => {
+    computers.forEach(computer => {
+      WA.room.hideLayer(computer);
+    });
+
+    WA.room.showLayer(computers[currentComputerIndex]);
+
+    currentComputerIndex = (currentComputerIndex + 1) % computers.length;
+  }, 1000);
+
+  setTimeout(() => {
+    clearInterval(intervalId);
+    computers.forEach(computer => {
+      WA.room.hideLayer(computer);
+    });
+  }, timerDuration);
+}
